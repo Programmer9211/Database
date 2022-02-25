@@ -213,4 +213,25 @@ class CustomDatabase {
   //   final values = List<int>.generate(length, (i) => random.nextInt(255));
   //   return base64UrlEncode(values);
   // }
+
+  Future<void> createLocalBackup() async {
+    Map<String, dynamic> _backupData = {};
+
+    await _readMainFiles();
+
+    List _baseFile = [];
+
+    Map<String, dynamic> _baseData = {};
+
+    for (var item in _map['Base']!) {
+      _baseFile.add(item);
+      _baseData['$item\_file'] = _map[item];
+      _baseData[item] = await query(item);
+    }
+
+    _backupData['base_file'] = _baseFile;
+    _backupData['base_data'] = _baseData;
+
+    debugPrint(_backupData.toString());
+  }
 }
