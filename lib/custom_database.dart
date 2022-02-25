@@ -19,7 +19,7 @@ class CustomDatabase {
     _path = path;
     if (!await File("$path/Base.txt").exists()) {
       await _writeFile("$path/Base.txt", "");
-      //debugPrint("WITING SUCESSULL");
+      debugPrint("WITING SUCESSULL");
     } else {
       await _readMainFiles();
     }
@@ -35,7 +35,7 @@ class CustomDatabase {
         jsonString = json.encode(content);
       }
 
-      //debugPrint("WRITING FILE SUCESSFULL");
+      debugPrint("WRITING FILE SUCESSFULL");
 
       return file.writeAsString(jsonString);
     } catch (e) {
@@ -52,7 +52,7 @@ class CustomDatabase {
 
       return contents;
     } catch (e) {
-      //debugPrint(e.toString());
+      debugPrint(e.toString());
       return "";
     }
   }
@@ -72,12 +72,12 @@ class CustomDatabase {
           String _jsonStringContent =
               await _readFile("$_path/$tableName/$_fileName.txt");
 
-          // print("$_path/$tableName/$_fileName.txt");
+          print("$_path/$tableName/$_fileName.txt");
 
           _tableData.add(json.decode(_jsonStringContent));
         }
       } else {
-        // debugPrint("NO DATA AVAILABLE");
+        debugPrint("NO DATA AVAILABLE");
       }
 
       return _tableData;
@@ -108,7 +108,7 @@ class CustomDatabase {
 
       _map[tableName] = _mainFile;
     } catch (e) {
-      //debugPrint(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -118,7 +118,7 @@ class CustomDatabase {
 
       await _writeFile("$_path/$tableName/$primaryKey.txt", content);
     } catch (e) {
-      //debugPrint(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -137,7 +137,7 @@ class CustomDatabase {
 
       await _writeFile("$_path/$tableName/$tableName.txt", _mainFile);
     } catch (e) {
-      //debugPrint(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -161,7 +161,7 @@ class CustomDatabase {
         await _writeFile("$_path/Base.txt", _base);
       }
     } catch (e) {
-      // debugPrint(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -187,20 +187,20 @@ class CustomDatabase {
 
             _map[_fileName] = typeCastStringList(_decoded);
 
-            // debugPrint("READING SUCESSFULL");
+            debugPrint("READING SUCESSFULL");
           } else {
             print("INSIDE");
-            // debugPrint("NO DATA AVAILABLE");
+            debugPrint("NO DATA AVAILABLE");
           }
         }
       } else {
-        // debugPrint("NO DATA AVAILABLE");
+        debugPrint("NO DATA AVAILABLE");
       }
     } catch (e) {
-      // debugPrint(e.toString());
+      debugPrint(e.toString());
     }
 
-    // print(_map);
+    print(_map);
   }
 
   Future<void> _deleteFile(path) async => await File(path).delete();
