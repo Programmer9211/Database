@@ -91,10 +91,10 @@ class CustomDatabase {
       String tableName, String primaryKey, Map<String, dynamic> values) async {
     try {
       await _createTable(tableName);
-      List<String> _mainFile = [];
-      if (_map.containsKey(tableName)) {
-        _mainFile = _map[tableName]!;
-      }
+      List<String> _mainFile = _map[tableName]!;
+      // if (_map.containsKey(tableName)) {
+      //   _mainFile = _map[tableName]!;
+      // }
 
       final String fileName = primaryKey;
 
@@ -150,9 +150,13 @@ class CustomDatabase {
           await File("$_absolutePath/$tableName.txt").create();
         });
 
+        _map[tableName] = [];
+
         List<String> _base = _map['Base']!;
 
         _base.add(tableName);
+
+        _map['Base'] = _base;
 
         await _writeFile("$_path/Base.txt", _base);
       }
